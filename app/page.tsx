@@ -62,13 +62,14 @@ export default async function Home() {
               <Clock />
             </div>
             <div className="p-4 md:p-6">
-              <Date />
+							<Date
+								hijri_offset={isNaN(Number(mosqueMetadata['hijri_offset'])) ? 0 : Number(mosqueMetadata['hijri_offset'])} />
             </div>
             <div className="p-4 md:p-6">
               <MosqueMetadata metadata={mosqueMetadata} />
             </div>
             <div className="hidden md:p-6 md:block">
-              <Notice />
+              <Notice customNotification={mosqueMetadata['custom_reminder']} />
             </div>
           </div>
           <div className="p-4 md:p-6 md:col-span-5">

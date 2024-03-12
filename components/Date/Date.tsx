@@ -2,9 +2,9 @@
 
 import moment from "moment-hijri"
 
-export default function Date() {
+export default function Date({hijri_offset}: {hijri_offset?: number}) {
   const englishDate = moment().format("dddd D MMMM YYYY")
-  const hijriDate = moment().locale("en").format("iD iMMMM iYYYY")
+  const hijriDate = moment().add(hijri_offset ?? 0, "day").locale("en").format("iD iMMMM iYYYY")
 
   return (
     <div className="text-white text-center md:text-left">
