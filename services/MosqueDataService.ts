@@ -24,7 +24,7 @@ if ( timeZone && !!moment.tz.zone(timeZone)) {
 
 export async function getMosqueData(): Promise<MosqueData> {
   const response = await fetch(MOSQUE_API_ENDPOINT, {
-    next: { revalidate: 120 },
+    cache: 'no-store',
   })
 
   return response.json()
