@@ -4,9 +4,11 @@ import moment from "moment"
 export default function SunriseJummahTiles({
   sunrise,
   jummahTimes = [],
+  isHanbaliJummah,
 }: {
   sunrise: string
   jummahTimes: JummahTimes
+  isHanbaliJummah?: boolean
 }) {
   return (
     <dl
@@ -27,13 +29,20 @@ export default function SunriseJummahTiles({
           key={index}
         >
           <dt className="text-sm lg:text-2xl font-medium">
-            {jummahTime.label}
+            {jummahTime.label}{index === 0 && isHanbaliJummah ? ' *' : ''}
           </dt>
           <dd className="mt-1 text-xl lg:text-5xl font-bold tracking-tight">
             {moment(jummahTime.time, ["HH:mm"]).format("h:mm")}
           </dd>
         </div>
       ))}
+      <div></div>
+      {isHanbaliJummah && (<div className="flex justify-end w-full">
+        <p className="italic text-xl md:text-2xl md:max-w-lg hidden md:block text-white pr-4">
+          *Hanbali Opinion
+        </p>
+      </div>)}
+
     </dl>
   )
 }

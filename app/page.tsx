@@ -21,6 +21,7 @@ import type {
 } from "@/types/DailyPrayerTimeType"
 import type { JummahTimes } from "@/types/JummahTimesType"
 import type { MosqueMetadataType } from "@/types/MosqueDataType"
+import moment from "moment"
 import type { Metadata } from "next"
 import UpcomingPrayerDayTiles from "@/components/UpcomingPrayerDayTiles/UpcomingPrayerDayTiles"
 
@@ -41,11 +42,13 @@ export default async function Home() {
   const upcomingPrayerDays: UpcomingPrayerTimes[] =
     await getPrayerTimesForUpcomingDays()
 
+  const isHanbaliJummah = moment(jummahTimes[0].time, "HH:mm").isBefore(moment(today.zuhr.start, "HH:mm"))
   let slides = [
     <SunriseJummahTiles
       sunrise={today.sunrise_start}
       jummahTimes={jummahTimes}
       key={"sunrise_jummah_times"}
+      isHanbaliJummah={isHanbaliJummah}
     />,
   ]
 
